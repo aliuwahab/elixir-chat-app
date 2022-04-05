@@ -1,4 +1,4 @@
-defmodule Chat.Message do
+defmodule Chat.Models.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
