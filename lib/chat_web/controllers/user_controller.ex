@@ -1,26 +1,23 @@
 defmodule ChatWeb.UserController do
   use ChatWeb, :controller
 
-  alias Phat.Accounts
-  alias Phat.Accounts.User
-
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.html", users: users)
-  end
+  alias Chat.Users
+  alias Chat.Models.User
 
   def show(conn, %{"id" => user_id}) do
-    user = Accounts.get_user(user_id)
+    user = Users.get_user(user_id)
     render(conn, "show.html", user: user)
   end
 
+  @spec new(Plug.Conn.t(), any) :: Plug.Conn.t()
   def new(conn, _params) do
-    changeset = Accounts.change_user(%User{})
+    changeset = Users.change_user(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
+  @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"user" => user_params}) do
-    case Accounts.create_user(user_params) do
+    case Users.create_user(user_params) do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)

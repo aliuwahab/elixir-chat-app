@@ -1,7 +1,8 @@
 defmodule Chat.Chats do
+
   alias Chat.Repo
-  alias Chat.Models.Chat
   alias Chat.Models.Message
+  alias Chat.Models.Chat
   import Ecto.Query
 
   def create_chat(chat_params) do
@@ -13,7 +14,7 @@ defmodule Chat.Chats do
     Message.changeset(%Message{}, message_params)
     |> Repo.insert!()
 
-    Phat.Chats.get_chat(message_params["chat_id"])
+    get_chat(message_params["chat_id"])
   end
 
   def change_message do

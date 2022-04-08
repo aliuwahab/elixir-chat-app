@@ -17,10 +17,14 @@ defmodule ChatWeb.Router do
   scope "/", ChatWeb do
     pipe_through :browser
 
-    resources "/users", UserController
+    resources "/users", UserController, only: [:new, :create, :show]
 
-    resources "/chats", ChatController
+    resources "/chats", ChatController, only: [:index]
 
+    resources "/:user_id/chats", ChatController, only: [:index]
+
+    # live "/rooms/:room_id", RoomsLive.Show, :show
+    live "/rooms/:room_id/user/:user_id", RoomsLive.Show, :show
 
     # get "/", PageController, :index
   end
