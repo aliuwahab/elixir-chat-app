@@ -23,7 +23,8 @@ defmodule ChatWeb.UserController do
         |> put_session(:user_id, user.id)
         |> configure_session(renew: true)
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        # |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: Routes.chat_path(conn, :index, user.id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

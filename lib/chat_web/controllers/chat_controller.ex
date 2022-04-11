@@ -2,7 +2,6 @@ defmodule ChatWeb.ChatController do
   use ChatWeb, :controller
   alias Chat.Chats
   alias Phoenix.LiveView
-  alias ChatWeb.ChatRoomView
   alias Chat.Users
 
   plug :authenticate_user
